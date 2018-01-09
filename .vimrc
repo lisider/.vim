@@ -8,10 +8,13 @@ set nocompatible
 
 "设置行号
 set number
+
+"设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
+
 "打开状态栏标尺
 set ruler
-set incsearch
+
 
 "设置 \t 转换为空格
 set expandtab
@@ -44,7 +47,8 @@ set ic
 "搜索高亮显示
 set hlsearch
 "未输入完成就开始检索
-set is 
+set incsearch
+"set is 
 "nnoremap <F5> :set hlsearch!<CR>
 
 
