@@ -86,7 +86,7 @@ set clipboard+=unnamed
 
 "打开vim支持256色
 set t_Co=256
-"主题设置为沙漠
+"主题设置为沙漠 在 /usr/share/vim/vim73/colors/ 中
 colorscheme desert
 
 "退格键使能(在 insert 模式下 C+h 不管用)
@@ -140,7 +140,7 @@ inoremap <C-l> <Esc><C-W>l
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件 区
+" Vundle 插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Vundle 插件
@@ -161,14 +161,19 @@ filetype plugin indent on
 "这里都是要安装的插件
 call vundle#begin()
 
+" 1
 Plugin 'VundleVim/Vundle.vim'
+
 "Vundle 支持多种插件源，
 "其中 Raimondi/delimitMate 这中写法表示
 "安装 github 上 Raimondi 用户的 delimitMate 插件
-"Plugin 'Raimondi/delimitMate'
 
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+" 2
+Plugin 'Raimondi/delimitMate'
+
+" 3
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 
 call vundle#end()
@@ -182,9 +187,21 @@ call vundle#end()
 " :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
 " h: vundle         - 获取帮助
 
-"添加完之后,重新打开vim ,然后 :PluginInstall
+"添加完之后,关闭vim,重新打开vim ,然后 :PluginInstall
 
 "下面可以写各插件的配置
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 其他 插件配置 区
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 2
+
+
+
+" 3
+
+
 
 
 
@@ -244,10 +261,91 @@ nmap <F11>  :TrinityToggleNERDTree<CR>
 
 """"""""""""""""""""""""""""""""""""""""""
 
-"由于插件原因,下面的映射被覆盖了,重写以便就好了
+"由于插件原因,下面的映射被覆盖了,重写一遍就好了
 nnoremap <space> :
 vnoremap <space> :
 
+
+" TITLE SETTINGS: {{{1
+"-------------------------------------------------
+" => set title
+"-------------------------------------------------
+
+"新建.c,.h,.sh,.java文件，自动插入文件头 
+
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()" 
+
+""定义函数SetTitle，自动插入文件头 
+
+func SetTitle() 
+
+    "如果文件类型为.sh文件 
+
+    if &filetype == 'sh' 
+
+        call setline(1,"\#########################################################################") 
+
+        call append(line("."), "\# File Name: ".expand("%")) 
+
+        call append(line(".")+1, "\# Author: Sues") 
+
+        call append(line(".")+2, "\# mail: sumory.kaka@foxmail.com") 
+
+        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+
+        call append(line(".")+4, "\# Version : 1.0") 
+
+        call append(line(".")+5, "\#########################################################################") 
+
+        call append(line(".")+6, "\#!/bin/bash") 
+
+        call append(line(".")+7, "") 
+
+    else 
+
+        call setline(1, "/*************************************************************************") 
+
+        call append(line("."), "    > File Name: ".expand("%")) 
+
+        call append(line(".")+1, "    > Author: Sues") 
+
+        call append(line(".")+2, "    > Mail: sumory.kaka@foxmail.com ") 
+
+        call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
+
+        call append(line(".")+4, " ************************************************************************/") 
+
+        call append(line(".")+5, "")
+
+    endif
+
+    if &filetype == 'cpp'
+
+        call append(line(".")+6, "#include<iostream>")
+
+        call append(line(".")+7, "using namespace std;")
+
+        call append(line(".")+8, "")
+
+    endif
+
+    if &filetype == 'c'
+
+        call append(line(".")+6, "#include <stdio.h>")
+
+        call append(line(".")+7, "")
+
+    endif
+
+
+endfunc 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+    "新建文件后，自动定位到文件末尾
+
+    autocmd BufNewFile * normal G
 
 
 
