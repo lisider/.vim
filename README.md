@@ -34,12 +34,14 @@ vim-config
 
 第二步，复制配置。
 
-        # git clone https://github.com/Yikun/.vim.git ~/.vim
+        # git clone git@github.com:lisider/.vim.git ~/.vim
+        # git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     
 第三步，创建.vimrc链接
 
         # ln -s ~/.vim/.vimrc ~/.vimrc
         
 最后，Enjoy it!
+
 
 BTW, 如果有网络的话，可以试试本项目的[vundle](https://github.com/Yikun/.vim/tree/vundle)分支，轻松安装、升级、管理插件。:)
