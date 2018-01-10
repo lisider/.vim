@@ -170,31 +170,27 @@ filetype plugin indent on
 "这里都是要安装的插件
 call vundle#begin()
 
-" 1
-Plugin 'VundleVim/Vundle.vim'
 
 "Vundle 支持多种插件源，
 "其中 Raimondi/delimitMate 这中写法表示
 "安装 github 上 Raimondi 用户的 delimitMate 插件
 
-" 2
-Plugin 'Raimondi/delimitMate'
 
 " 3
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
 
 
 " 4
 "自动扩展
 " Track the engine.
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 " " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
 
 " 5
 "快速注释
-Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/nerdcommenter'
 
 
 
@@ -206,7 +202,8 @@ call vundle#end()
 " :PluginInstall    - 安装插件
 " :PluginUpdate     - 更新插件
 " :PluginSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
-" :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
+" :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可 这个
+" 是删除 列表中没有的插件
 " h: vundle         - 获取帮助
 
 "添加完之后,关闭vim,重新打开vim ,然后 :PluginInstall
@@ -234,29 +231,7 @@ call vundle#end()
 "  自己安装的插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
-"DoxygenToolkit
-"自动格式化注释
-
-"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"
-" " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
-"
-let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
-let g:DoxygenToolkit_paramTag_pre="@Param "
-let g:DoxygenToolkit_returnTag="@Returns   "
-let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
-let g:DoxygenToolkit_authorName="Mathias Lorente"
-let g:DoxygenToolkit_licenseTag="My own license"   
-
+"最好不要自己安装,最好让 Vendle 管理
 
 
 
@@ -264,12 +239,12 @@ let g:DoxygenToolkit_licenseTag="My own license"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " else 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+
 "保留vim 上次编辑位置,下次从这里打开
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif   
-
-
-
-
 
 
 
