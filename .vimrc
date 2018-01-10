@@ -150,7 +150,7 @@ inoremap <C-l> <Esc><C-W>l
 " Vundle 插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
+" Config0 Vundle 插件配置 
 
 set nocompatible              " 去除VI一致性,必须
 filetype off                  " 必须
@@ -161,7 +161,9 @@ call vundle#begin()
 " 另一种选择, 指定一个vundle安装插件的路径
 "call vundle#begin('~/some/path/here')
 
-" 让vundle管理插件版本,必须
+" 让vundle管理Vundle,必须
+
+" 0 Plugin0
 Plugin 'VundleVim/Vundle.vim'
 
 " 以下范例用来支持不同格式的插件安装.
@@ -190,29 +192,32 @@ Plugin 'VundleVim/Vundle.vim'
 
 " 你的所有插件需要在下面这行之前
 
+"--------------------------------------------------------------------
+"--------------------------------------------------------------------
+"--------------------------------------------------------------------
+"--------------------------------------------------------------------
 
-
-
-
-" 3
+" 1 Plugin1 vim-airline "状态栏
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
 
 
-" 4
-"自动扩展
+" 2 Plugin2 ultisnips 自动扩展
 " Track the engine.
 "Plugin 'SirVer/ultisnips'
-" " Snippets are separated from the engine. Add this if you want them:
+"Snippets are separated from the engine. Add this if you want them:
 "Plugin 'honza/vim-snippets'
 
-" 5
-"快速注释
+" 3 Plugin3 nerdcommenter 快速注释
 "Plugin 'scrooloose/nerdcommenter'
 
 
 
 
+"--------------------------------------------------------------------
+"--------------------------------------------------------------------
+"--------------------------------------------------------------------
+"--------------------------------------------------------------------
 
 "添加完之后,关闭vim,重新打开vim ,然后 :PluginInstall
 call vundle#end()            " 必须
