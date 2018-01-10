@@ -10,6 +10,8 @@ set nocompatible
 
 "设置行号
 set number
+"设置相对行号
+"set relativenumber
 
 "设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
@@ -51,7 +53,6 @@ set hlsearch
 "未输入完成就开始检索
 set incsearch
 "set is 
-"nnoremap <F5> :set hlsearch!<CR>
 
 
 "关键字上色
@@ -123,10 +124,6 @@ let mapleader=";"
 "强制保存命令
 cmap sw w !sudo tee >/dev/null %
 
-"build tags of your own project with Ctrl-F12
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q.<CR>
-
-
 "空格映射冒号
 nnoremap <space> :
 vnoremap <space> :
@@ -144,13 +141,16 @@ inoremap <C-k> <Esc><C-W>k
 inoremap <C-l> <Esc><C-W>l
 
 
+" Fn 的映射  
+
+nnoremap <F4> :!ctags -R<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle 插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Config0 Vundle 插件配置 
+" 0 Config0 Vundle  插件管理
 
 set nocompatible              " 去除VI一致性,必须
 filetype off                  " 必须
@@ -163,7 +163,8 @@ call vundle#begin()
 
 " 让vundle管理Vundle,必须
 
-" 0 Plugin0
+
+" 0 Plugin0 Vundle  插件管理
 Plugin 'VundleVim/Vundle.vim'
 
 " 以下范例用来支持不同格式的插件安装.
@@ -197,21 +198,48 @@ Plugin 'VundleVim/Vundle.vim'
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
 
-" 1 Plugin1 vim-airline "状态栏
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+" 1 Plugin1 vim-airline 状态栏
+Plugin 'vim-airline/vim-airline' "状态栏内容
+Plugin 'vim-airline/vim-airline-themes' "状态栏主题
 
 
-" 2 Plugin2 ultisnips 自动扩展
-" Track the engine.
-"Plugin 'SirVer/ultisnips'
-"Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
+" 2 Plugin2 ultisnips 自动扩展 及分片
+Plugin 'SirVer/ultisnips' " snip 引擎
+Plugin 'honza/vim-snippets' "常用的 snippet 
 
-" 3 Plugin3 nerdcommenter 快速注释
-"Plugin 'scrooloose/nerdcommenter'
+" 3 Plugin3 neocomplete.vim 候选列表
+Plugin 'Shougo/neocomplete.vim' 
+
+" 4 Plugin4 auto-pairs 括号数目匹配
+Plugin 'jiangmiao/auto-pairs'
+
+" 5 Plugin5 rainbow_parentheses.vim 括号颜色匹配
+Plugin 'kien/rainbow_parentheses.vim'
+
+" 6 Plugin6 vim-multiple-cursors 多行编辑
+Plugin 'terryma/vim-multiple-cursors'
+
+" 7 Plugin7 vim-easymotion 快速移动
+Plugin 'easymotion/vim-easymotion'
+
+" 8 Plugin8 nerdtree 项目树
+Plugin 'scrooloose/nerdtree'
+
+" 9 Plugin9 ctrlp.vim 文件管理
+Plugin 'kien/ctrlp.vim'
+
+" A PluginA tagbar 函数列表
+Plugin 'majutsushi/tagbar'
 
 
+" B Plugin3 nerdcommenter 快速注释
+Plugin 'scrooloose/nerdcommenter'
+
+" C PluginC DoxygenToolkit.vim 注释文档
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+
+" D PluginD supertab 解决 neocomplete.vim 和 ultisnips 的兼容问题
+Plugin 'ervandew/supertab'
 
 
 "--------------------------------------------------------------------
@@ -242,6 +270,161 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+" 1 Config1 vim-airline-themes 状态栏
+let g:airline_theme='simple' "更改主题,主题位置在 ~/.vim/bundle/vim-airline-themes/autoload/airline/themes
+
+
+" 2 Config2 ultisnips 自动扩展
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>" " 更改展开键为
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+" 3 Config3 neocomplete 候选列表
+let g:neocomplete#enable_at_startup = 1
+
+
+
+" 5 Config5 rainbow_parentheses.vim 括号颜色匹配
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \]
+
+let g:rbpt_max = 16
+
+let g:rbpt_loadcmd_toggle = 0
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+
+" 6 Config6 vim-multiple-cursors 多行编辑
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+"useage:
+"ctrl+n 选中一个
+"ctrl+p 放弃一个, 回到上一个
+"ctrl+x 跳过当前选中, 选中下一个
+"esc    退出
+
+" 7 Config7 vim-easymotion 快速移动
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" " `s{char}{lael}`
+nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)"
+
+
+" 8 Config8 nerdtree 项目树
+nmap <F3> :NERDTreeToggle<cr>
+"如果只剩下打开的窗口是NERDTree，怎么关闭vim？
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"默认箭头
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+
+" 9 Config9 ctrlp.vim 文件管理
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+     \ 'file': '\v\.(exe|so|dll)$',
+     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+     \ }
+let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux"
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_user_command = ['.hg', 'hg --cwd %s locate -I .']
+
+let g:ctrlp_user_command = {
+            \ 'types': {
+          \ 1: ['.git', 'cd %s && git ls-files'],
+          \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+          \ },
+     \ 'fallback': 'find %s -type f'
+     \ }
+
+"useage : :help ctrlp-options
+
+" A ConfigA tagbar 函数列表
+nmap <F2> :TagbarToggle <CR>
+
+
+" B Config3 nerdcommenter 快速注释
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'  }  }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
+" C ConfigC DoxygenToolkit.vim 注释文档
+
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+let g:DoxygenToolkit_authorName="Sues"
+let g:DoxygenToolkit_licenseTag="My own license"  
+
+" useage DoxLic DoxAuthor Dox
 
 
 
@@ -261,10 +444,10 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-
 "保留vim 上次编辑位置,下次从这里打开
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif   
 
+" 解决 YCM 和  Ultisnips tab 键 冲突 
 
 
 
@@ -345,6 +528,4 @@ endfunc
 "新建文件后，自动定位到文件末尾
 
 autocmd BufNewFile * normal G
-
-
 

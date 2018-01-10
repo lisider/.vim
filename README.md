@@ -41,6 +41,8 @@
 
 - 还能怎么做
 ```c
+     0/因为我已经在 .vimrc 加了 13 个插件(除了 Vundle) 及
+     配置,但是没安装,你可以安装
      1/在 Vundle 的设置中添加插件
      2/关闭vim
      3/打开vim
@@ -48,16 +50,76 @@
 
 ```
 
+- 我加了那些插件
+```c
+    " 1 Plugin1 vim-airline 状态栏
+    
+    " 2 Plugin2 ultisnips 自动扩展 及分片
+    
+    " 3 Plugin3 neocomplete.vim 候选列表"
+
+    " 4 Plugin4 auto-pairs 括号数目匹配
+    
+    " 5 Plugin5 rainbow_parentheses.vim 括号颜色匹配 
+
+    " 6 Plugin6 vim-multiple-cursors 多行编辑
+    
+    " 7 Plugin7 vim-easymotion 快速移动
+
+    " 8 Plugin8 nerdtree 项目树
+    
+    " 9 Plugin9 ctrlp.vim 文件管理
+
+    " A PluginA tagbar 函数列表 
+    
+    " B Plugin3 nerdcommenter 快速注释
+
+    " C PluginC DoxygenToolkit.vim 注释文档
+    
+    " D PluginD supertab 解决 neocomplete.vim 和 ultisnips 的兼容问题
+
+```
+
+- 这些插件怎么用
+
+```c
+     6
+
+     7
+          j5 跳到下面5行
+
+     9
+          Ctrl + p
+
+     B
+          选择 一个 代码块, ;cc 注释
+          选择 一个 代码块, ;cu 去注释
+     C
+          光标位于第一行  :DoxAuthor
+          光标位于第一行  :DoxLic
+          光标位于函数声明  :Dox
+
+     
+```
+
+
+
+
+
+
+
+
 
 - Vundle 支持的 设置语法
 ```c
      .vimrc 中有写
-     
 
 ```
 
 
-- 插件从哪里找
+
+
+- 如果你还想要其他插件,从哪里找?
 ```c
      github
      注意: 某些 插件对 vim 有版本要求
