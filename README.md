@@ -1,32 +1,25 @@
 vim-config
 ==========
-###是什么?###
+- 是什么?
 
-这是我的vim配置，当然，如果喜欢可以你可以随意拿去。(^_^)
+     这是我的vim配置，当然，如果喜欢可以你可以随意拿去。(^_^)
 
-###有什么?###
 
-`pathogen.vim` 用于插件管理，把插件放到bundle目录就可以了。
+- 有什么用?
+     使用vim 更舒服
 
-`Trinity.vim` 用于集中管理taglist、nerdtree、srcexpl三个插件，按 `F8` 就可以快速打开这三个插件了。
+- 有什么?
 
-`taglist.vim` 用于生成、展示函数列表
+    设置部分
+          一些常用设置 
+    插件部分
+          Vundle 的设置
+          注意,Vundle 没有安装,所以要在运行vi之前,把 Vundle 装好
+          下面的流程已经做好了,按照流程做就好了
+    
 
-`nerdtree.vim` 用于生成、展示目录和文件
+- 怎么用？
 
-`srcexpl.vim` 用于函数的展示，当移动到函数上的之后，就会在srcexpl的窗口里面显示函数定义的。
-
-`CSApprox.vim` 这是一个vim配色的插件，我比较喜欢desert这个配色。
-
-`a.vim` 用于快速切换*.c和*.h
-
-`ctrlp.vim` 用于文件的模糊搜索，能够加快打开文件的速度[效果](http://yikun.github.io/assets/post/2014-03-19-vim/vim_ctrlp.png)
-
-`powerline.vim` 一个优雅的状态栏插件
-
-`vimgrep` 自带插件，用于搜索tags中匹配字符，[效果](http://yikun.github.io/assets/post/2014-03-19-vim/vim_grep.png)
-
-###怎么用？###
 第一步，备份。
 
         # mv ~/.vim backup
@@ -44,4 +37,3 @@ vim-config
 最后，Enjoy it!
 
 
-BTW, 如果有网络的话，可以试试本项目的[vundle](https://github.com/Yikun/.vim/tree/vundle)分支，轻松安装、升级、管理插件。:)
