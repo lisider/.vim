@@ -77,7 +77,7 @@ set nofoldenable
 
 "configure tags - add additional tags here or comment out not-used ones
 set tags+=~/.vim/tags/cpp
-set tags+=./vimtags
+set tags+=./tags
 
 "表示不需要备份文件
 set nobackup                       
