@@ -2,6 +2,8 @@
 " set 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+
 "设置和 vi 兼容
 set nocp
 set nocompatible
@@ -91,9 +93,15 @@ colorscheme desert
 
 "退格键使能(在 insert 模式下 C+h 不管用)
 "set backspace=indent,eol,start
+
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 
 "小写转大写 wb 为 到 单词 的开始
 nnoremap gu  wbgUw
@@ -118,9 +126,6 @@ cmap sw w !sudo tee >/dev/null %
 "build tags of your own project with Ctrl-F12
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q.<CR>
 
-"插件安装管理
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
 
 "空格映射冒号
 nnoremap <space> :
@@ -139,9 +144,13 @@ inoremap <C-k> <Esc><C-W>k
 inoremap <C-l> <Esc><C-W>l
 
 
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle 插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 
 "Vundle 插件
 set nocompatible
@@ -176,6 +185,19 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 
+" 4
+"自动扩展
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" " Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" 5
+"快速注释
+Plugin 'scrooloose/nerdcommenter'
+
+
+
 call vundle#end()
 
 
@@ -191,16 +213,49 @@ call vundle#end()
 
 "下面可以写各插件的配置
 
+
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 其他 插件配置 区
+" Vundle 管理的插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 2
 
 
 
-" 3
 
+
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  自己安装的插件配置 区
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+"DoxygenToolkit
+"自动格式化注释
+
+"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
+" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+"
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
+let g:DoxygenToolkit_authorName="Mathias Lorente"
+let g:DoxygenToolkit_licenseTag="My own license"   
 
 
 
@@ -212,64 +267,17 @@ call vundle#end()
 "保留vim 上次编辑位置,下次从这里打开
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif   
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 
-map ff :call Search_Word()<CR>:copen<CR>
-function Search_Word()
-	let w = expand("<cword>") " 在当前光标位置抓词
-	execute "vimgrep " w " *"
-endfunction
 
-nmap <F4> :cn<cr>
-nmap <F3> :cp<cr>
-
-function! QFSwitch()
-	redir => ls_output
-	execute ':silent! ls'
-	redir END
-
-	let exists = match(ls_output, "[Quickfix List")
-	if exists == -1
-		execute ':copen'
-	else
-		execute ':cclose'
-		execute ':TrinityToggleAll'
-		execute ':TrinityToggleAll'
-	endif
-endfunction
-
-map <C-o> <ESC>:call QFSwitch()<CR>
-
-" Open and close all the three plugins on the same time 
-nmap <F8>   :TrinityToggleAll<CR> 
-
-" Open and close the srcexpl.vim separately 
-nmap <F9>   :TrinityToggleSourceExplorer<CR> 
-
-" Open and close the taglist.vim separately 
-nmap <F10>  :TrinityToggleTagList<CR> 
-
-" Open and close the NERD_tree.vim separately 
-nmap <F11>  :TrinityToggleNERDTree<CR>
 
 
 
 
 
 """"""""""""""""""""""""""""""""""""""""""
-
+" title 区  
 """"""""""""""""""""""""""""""""""""""""""
 
-"由于插件原因,下面的映射被覆盖了,重写一遍就好了
-nnoremap <space> :
-vnoremap <space> :
-
-
-" TITLE SETTINGS: {{{1
-"-------------------------------------------------
-" => set title
-"-------------------------------------------------
 
 "新建.c,.h,.sh,.java文件，自动插入文件头 
 
@@ -340,12 +348,9 @@ func SetTitle()
 
 endfunc 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"新建文件后，自动定位到文件末尾
 
-
-    "新建文件后，自动定位到文件末尾
-
-    autocmd BufNewFile * normal G
+autocmd BufNewFile * normal G
 
 
 
