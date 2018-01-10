@@ -152,28 +152,46 @@ inoremap <C-l> <Esc><C-W>l
 
 
 
-"Vundle 插件
-set nocompatible
-filetype off
+set nocompatible              " 去除VI一致性,必须
+filetype off                  " 必须
 
+" 设置包括vundle和初始化相关的runtime path
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+" 另一种选择, 指定一个vundle安装插件的路径
+"call vundle#begin('~/some/path/here')
 
-Plugin 'gmarik/Vundle.vim'
+" 让vundle管理插件版本,必须
+Plugin 'VundleVim/Vundle.vim'
 
-call vundle#end()
-filetype plugin indent on
+" 以下范例用来支持不同格式的插件安装.
+" 请将安装插件的命令放在vundle#begin和vundle#end之间.
+" Github上的插件
+" 格式为 Plugin '用户名/插件仓库名'
+
+"Plugin 'tpope/vim-fugitive'
+" 来自 http://vim-scripts.org/vim/scripts.html 的插件
+" Plugin '插件名称' 实际上是 Plugin 'vim-scripts/插件仓库名' 只是此处的用户名可以省略
+
+"Plugin 'L9'
+" 由Git支持但不再github上的插件仓库 Plugin 'git clone 后面的地址'
+
+"Plugin 'git://git.wincent.com/command-t.git'
+" 本地的Git仓库(例如自己的插件) Plugin 'file:///+本地插件仓库绝对路径'
+
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" 插件在仓库的子目录中.
+" 正确指定路径用以设置runtimepath. 以下范例插件在sparkup/vim目录下
+
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" 安装L9，如果已经安装过这个插件，可利用以下格式避免命名冲突
+
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" 你的所有插件需要在下面这行之前
 
 
-"其他插件
-"在 call vundle#begin() 和 call vundle#end() 之间加入你想要配置插件的名字
-"这里都是要安装的插件
-call vundle#begin()
 
-
-"Vundle 支持多种插件源，
-"其中 Raimondi/delimitMate 这中写法表示
-"安装 github 上 Raimondi 用户的 delimitMate 插件
 
 
 " 3
@@ -194,23 +212,23 @@ call vundle#begin()
 
 
 
-call vundle#end()
 
-
-" 常用命令
-" :PluginList       - 查看已经安装的插件
-" :PluginInstall    - 安装插件
-" :PluginUpdate     - 更新插件
-" :PluginSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
-" :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可 这个
-" 是删除 列表中没有的插件
-" h: vundle         - 获取帮助
 
 "添加完之后,关闭vim,重新打开vim ,然后 :PluginInstall
-
-"下面可以写各插件的配置
-
-
+call vundle#end()            " 必须
+filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
+" 忽视插件改变缩进,可以使用以下替代:
+"filetype plugin on
+"
+" 简要帮助文档
+" :PluginList       - 列出所有已配置的插件
+" :PluginInstall    - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
+" :PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存
+" :PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件
+"                   - 删除插件，把安装插件对应行删除，然后执行这个命令即可 ,这个是删除 列表中没有的插件
+"
+" 查阅 :h vundle 获取更多细节和wiki以及FAQ
+" 将你自己对非插件片段放在这行之后
 
 
 
@@ -233,13 +251,9 @@ call vundle#end()
 
 "最好不要自己安装,最好让 Vendle 管理
 
-
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " else 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 
 
