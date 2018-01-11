@@ -19,6 +19,9 @@ set showmatch
 "打开状态栏标尺
 set ruler
 
+" 背景亮度
+set bg=dark " light
+
 
 "设置 \t 转换为空格
 set expandtab
@@ -30,15 +33,17 @@ set softtabstop=5
 
 "设置自动缩进
 set autoindent
-"设置使用C/C++自动缩进
-set cindent                           
+"设置使用C/C++ 缩进
+set cindent        
+" 设置缩进模式
+"set   cinoptions=:0
 "根据不同的文件类型设置不同的 indent ,默认配置 在/usr/share/vim/vim74/indent
 filetype plugin indent on
 
 "80字符
 set colorcolumn=81
 "自动换行
-set textwidth=80
+"set textwidth=80
 "添加中文字符检测
 set fo+=mB
 
@@ -46,8 +51,9 @@ set fo+=mB
 "set nowrap
 "nnoremap <F4> :set wrap!<CR>
 
-"搜索忽略大小写
-set ic
+"搜索忽略大小写 ignorecase
+"set ic "完全忽略大小写"
+set ignorecase smartcase "根据输入,如果是小写,忽略大小写,如果有大写,则不忽略大小写"
 "搜索高亮显示
 set hlsearch
 "未输入完成就开始检索
@@ -62,6 +68,8 @@ syntax on
 "文件编码格式 从 utf-8 一次检测 ,若再有乱码问题,可以考虑插件 fencview.vim
 set fileencodings=utf-8,chinese,latin-1
 
+"终端编码格式
+set   termencoding=utf-8
 
 "高亮当前行
 set cursorline
@@ -70,9 +78,17 @@ set cursorline
 "智能补全命令行
 set wildmenu
 
+"匹配下拉菜单
+set completeopt=longest,menu 
 
 "不使用代码折叠功能
-set nofoldenable
+"set nofoldenable
+"使用代码折叠
+set foldenable
+"折叠方法 6中  
+"方法    关键字
+"marker  Line{{{1
+set foldmethod=marker
 
 
 "configure tags - add additional tags here or comment out not-used ones
@@ -95,7 +111,26 @@ colorscheme desert
 "退格键使能(在 insert 模式下 C+h 不管用)
 "set backspace=indent,eol,start
 
+"设置文件格式
+set  fileformat=unix
 
+
+"卷洞时保留 N 行
+set scrolloff=10
+
+"状态栏显示当前显示的命令
+set showcmd
+
+"自动折返
+set whichwrap=b,s,<,>,[,] 
+
+"模式匹配要写入的文件名，不建立它的备份文件
+set wildignore=*.bak,*.o,*.e,*~
+
+" 命令模式下 tab键 匹配
+set wildmenu
+"配置规则
+"set wildmode=longest,list,full
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -143,7 +178,7 @@ inoremap <C-l> <Esc><C-W>l
 
 " Fn 的映射  
 
-nnoremap <F4> :!ctags -R<CR>
+nnoremap <F4> :!ctags -R.<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
