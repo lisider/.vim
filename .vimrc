@@ -1,3 +1,5 @@
+" SET {{{1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -31,19 +33,22 @@ set expandtab
 set shiftwidth=4
 set softtabstop=5
 
-"设置自动缩进
+"设置和上一行一样缩进
 set autoindent
 "设置使用C/C++ 缩进
 set cindent        
 " 设置缩进模式
 "set   cinoptions=:0
-"根据不同的文件类型设置不同的 indent ,默认配置 在/usr/share/vim/vim74/indent
+"探测文件类型
+"设置不同的 缩进,默认配置 在/usr/share/vim/vim74/indent
+"设置不同的 高亮
+"设置不同的插件
 filetype plugin indent on
 
 "80字符
 set colorcolumn=81
-"自动换行
-"set textwidth=80
+"自动换行,仅在纯文本中才换行
+autocmd FileType text setlocal textwidth=80
 "添加中文字符检测
 set fo+=mB
 
@@ -87,15 +92,23 @@ set completeopt=longest,menu
 set foldenable
 "折叠方法 6中  
 "方法    关键字
-"marker  Line{{{1
+"marker  Line {\{\{\1
 set foldmethod=marker
+"怎么切换折叠 za
 
 
 "configure tags - add additional tags here or comment out not-used ones
 set tags+=~/.vim/tags/cpp
 set tags+=./tags
 
-"表示不需要备份文件
+if 0
+    if has("vms") "因为在 vms 系统中 会自动创建备份
+        set nobackup                       
+    else
+        set backup
+    endif
+endif
+
 set nobackup                       
 "表示不创建临时交换文件
 "set noswapfile
@@ -104,7 +117,7 @@ set nobackup
 set clipboard+=unnamed
 
 "打开vim支持256色
-set t_Co=256
+set t_Co=256 "在 文字界面下意识不到系统支持256色,需要手动设置,在图形界面下默认为 256
 "主题设置为沙漠 在 /usr/share/vim/vim73/colors/ 中
 colorscheme desert
 
@@ -115,13 +128,16 @@ colorscheme desert
 set  fileformat=unix
 
 
-"卷洞时保留 N 行
+"光标上下移动时, 移动方向 残留 10行 时开始卷动
 set scrolloff=10
+
+"光标左右移动时, 移动方向 残留 10行 时开始卷动
+set sidescroll=10
 
 "状态栏显示当前显示的命令
 set showcmd
 
-"自动折返
+"自动折返 ,这个被覆盖了,后面重写一次就好了
 set whichwrap=b,s,<,>,[,] 
 
 "模式匹配要写入的文件名，不建立它的备份文件
@@ -132,11 +148,31 @@ set wildmenu
 "配置规则
 "set wildmode=longest,list,full
 
+"历史记录大小
+
+set history=1000
+
+" 不显示 tab 和 回车 
+set nolist 
+
+"对于vim 来说什么是一个单词 ,需要重写
+"set iskeyword=@,48-57,_,192-255
+set iskeyword+=-
+
+"命令行模式的高度
+set cmdheight=2
+
+" 显示 tab 和 回车  tab 为 ^I  回车 为 $
+"set list
+"set listchars=tab:>-,trail:-
+" MAP {{{1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"因为插件的原因,需要多插入一个 <del>
+map \p i(<del><Esc>ea)<Esc>
 
 
 "小写转大写 wb 为 到 单词 的开始
@@ -180,6 +216,8 @@ inoremap <C-l> <Esc><C-W>l
 
 nnoremap <F4> :!ctags -R.<CR>
 
+
+" Vundle Plugin {{{1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle 插件配置 区
@@ -299,6 +337,8 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 " 将你自己对非插件片段放在这行之后
 
 
+" Plugin Config {{{1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle 管理的插件配置 区
@@ -326,23 +366,23 @@ let g:neocomplete#enable_at_startup = 1
 
 " 5 Config5 rainbow_parentheses.vim 括号颜色匹配
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \]
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['black',       'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \]
 
 let g:rbpt_max = 16
 
@@ -402,10 +442,10 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-     \ 'file': '\v\.(exe|so|dll)$',
-     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-     \ }
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+            \ }
 let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux"
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
@@ -413,11 +453,11 @@ let g:ctrlp_user_command = ['.hg', 'hg --cwd %s locate -I .']
 
 let g:ctrlp_user_command = {
             \ 'types': {
-          \ 1: ['.git', 'cd %s && git ls-files'],
-          \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-          \ },
-     \ 'fallback': 'find %s -type f'
-     \ }
+            \ 1: ['.git', 'cd %s && git ls-files'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+            \ },
+            \ 'fallback': 'find %s -type f'
+            \ }
 
 "useage : :help ctrlp-options
 
@@ -465,14 +505,14 @@ let g:DoxygenToolkit_licenseTag="My own license"
 
 
 
-
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自己安装的插件配置 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "最好不要自己安装,最好让 Vendle 管理
+
+
+" AUTOCMD {{{1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " else 区
@@ -485,6 +525,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " 解决 YCM 和  Ultisnips tab 键 冲突 
 
 
+" TITLE {{{1
 
 """"""""""""""""""""""""""""""""""""""""""
 " title 区  
@@ -564,3 +605,8 @@ endfunc
 
 autocmd BufNewFile * normal G
 
+
+" RESET {{{1
+
+set whichwrap=b,s,<,>,[,] 
+set iskeyword+=-
