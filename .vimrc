@@ -122,7 +122,7 @@ set t_Co=256 "在 文字界面下意识不到系统支持256色,需要手动设�
 colorscheme desert
 
 "退格键使能(在 insert 模式下 C+h 不管用)
-"set backspace=indent,eol,start
+set backspace=indent,eol,start
 
 "设置文件格式
 set  fileformat=unix
@@ -157,7 +157,7 @@ set nolist
 
 "对于vim 来说什么是一个单词 ,需要重写
 "set iskeyword=@,48-57,_,192-255
-set iskeyword+=-
+"set iskeyword+=-
 
 "命令行模式的高度
 set cmdheight=2
@@ -613,3 +613,4 @@ autocmd BufNewFile * normal G
 
 set whichwrap=b,s,<,>,[,] 
 set iskeyword+=-
+
