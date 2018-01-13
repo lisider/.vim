@@ -47,6 +47,8 @@ filetype plugin indent on
 
 "80字符
 set colorcolumn=81
+"设置81行的颜色
+"hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 "自动换行,仅在纯文本中才换行
 autocmd FileType text setlocal textwidth=80
 "添加中文字符检测
@@ -199,18 +201,19 @@ cmap sw w !sudo tee >/dev/null %
 nnoremap <space> :
 vnoremap <space> :
 
-"映射光标在 vsplit 窗口间移动的快捷键
+if 1
+    "映射光标在 vsplit 窗口间移动的快捷键
 
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-"下面的这条有问题 会把 insert 模式下的 backspace 搞丢
-"inoremap <C-h> <Esc><C-W>h
-inoremap <C-j> <Esc><C-W>j
-inoremap <C-k> <Esc><C-W>k
-inoremap <C-l> <Esc><C-W>l
-
+    nnoremap <C-h> <C-W>h
+    nnoremap <C-j> <C-W>j
+    nnoremap <C-k> <C-W>k
+    nnoremap <C-l> <C-W>l
+    "下面的这条有问题 会把 insert 模式下的 backspace 搞丢
+    "inoremap <C-h> <Esc><C-W>h
+    inoremap <C-j> <Esc><C-W>j
+    inoremap <C-k> <Esc><C-W>k
+    inoremap <C-l> <Esc><C-W>l
+endif
 
 " Fn 的映射  
 
@@ -611,6 +614,7 @@ autocmd BufNewFile * normal G
 
 " RESET {{{1
 
-set whichwrap=b,s,<,>,[,] 
+"set whichwrap=b,s,<,>,[,] 
 set iskeyword+=-
 
+hi ColorColumn ctermbg=lightgrey guibg=lightgrey
