@@ -219,6 +219,12 @@ endif
 
 nnoremap <F4> :!ctags -R.<CR>
 
+function! Build()
+    make
+    cl  "list the errors
+endfunction 
+map <F5> :call Build()<CR>
+
 
 " Vundle Plugin {{{1
 
@@ -319,6 +325,10 @@ Plugin 'ervandew/supertab'
 
 " E PluginE csapprox 解决 文字终端和 图形终端色彩不同的问题 
 Plugin 'godlygeek/csapprox'
+
+" F PluginF VisIncr  增强纵向编辑
+Plugin 'vim-scripts/VisIncr'
+
 
 
 "--------------------------------------------------------------------
