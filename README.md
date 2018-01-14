@@ -12,24 +12,31 @@
 
 - 有什么?
 ```c
-    设置部分
-          一些常用设置 
-    插件部分
-          Vundle 的设置
-          注意,Vundle 没有安装,所以要在运行vi之前,把 Vundle 装好
-          下面的流程已经做好了,按照流程做就好了
+    set 
+
+    map
+
+    autocmd
+
+    plugin
+        插件由Vundle 管理
+
+    filetype
+
+    syntax
+
+    function
 ```
 
 
 - 怎么用?
 
 ```c
-1/
-方法1
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh)"
+    方法1
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh)"
 
-方法2
-bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh -O -)"
+    方法2
+    bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh -O -)"
 ```
 
 
@@ -99,6 +106,7 @@ bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim
      github
      vim源码
      vim邮件列表及vim插件
+     自己写
 ```
 
 
