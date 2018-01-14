@@ -20,23 +20,7 @@
 - 怎么用？
 
 ```c
-
-第一步，备份。
-
-        # mv ~/.vim backup
-        # mv ~/.vimrc backup
-
-第二步，复制配置。
-
-        # git clone git@github.com:lisider/.vim.git ~/.vim
-        # git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    
-第三步，创建.vimrc链接
-
-        # ln -s ~/.vim/.vimrc ~/.vimrc
-        
-最后，Enjoy it!
-
+curl -s https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh |bash
 ```
 
 - 还能怎么做
