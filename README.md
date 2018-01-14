@@ -77,6 +77,7 @@
     " C PluginC DoxygenToolkit.vim 注释文档
     
     " D PluginD supertab 解决 neocomplete.vim 和 ultisnips 的兼容问题
+    " F PluginF VisIncr  增强纵向编辑
 
 ```
 
