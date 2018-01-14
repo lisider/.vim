@@ -78,6 +78,9 @@
     
     " D PluginD supertab 解决 neocomplete.vim 和 ultisnips 的兼容问题
 
+
+    " E PluginE csapprox 解决 文字终端和 图形终端色彩不同的问题 
+
     " F PluginF VisIncr  增强纵向编辑
 
 ```
