@@ -3,10 +3,13 @@
      这是我的vim配置，当然，如果喜欢可以你可以随意拿去。(^_^)
 ```
 
+
 - 有什么用?
 ```c
      使用vim 更舒服
 ```
+
+
 - 有什么?
 ```c
     设置部分
@@ -17,7 +20,8 @@
           下面的流程已经做好了,按照流程做就好了
 ```
 
-- 怎么用？
+
+- 怎么用?
 
 ```c
 1/
@@ -26,21 +30,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/lisider/.vim/master/conf
 
 方法2
 bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh -O -)"
-
 ```
 
-- 还能怎么做
-```c
-     0/因为我已经在 .vimrc 加了 13 个插件(除了 Vundle) 及
-     配置,但是没安装,你可以安装
-     1/在 Vundle 的设置中添加插件
-     2/关闭vim
-     3/打开vim
-     4/在命令行下输入 :PluginInstall
 
-```
-
-- 我加了那些插件
+- 我加了那些插件?
 ```c
     " 1 Plugin1 vim-airline 状态栏
     
@@ -71,11 +64,10 @@ bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim
     " E PluginE csapprox 解决 文字终端和 图形终端色彩不同的问题 
 
     " F PluginF VisIncr  增强纵向编辑
-
 ```
 
-- 这些插件怎么用
 
+- 这些插件怎么用?
 ```c
      6
           可以ctrl +n 选择一样的 标识符,然后键入 c ,同时修改多个标识符
@@ -93,30 +85,32 @@ bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim
           光标位于第一行  :DoxAuthor
           光标位于第一行  :DoxLic
           光标位于函数声明  :Dox
-
-     
 ```
 
 
-
-
-
-
-
-
-
-- Vundle 支持的 设置语法
+- Vundle 支持的 设置语法?
 ```c
      .vimrc 中有写
-
 ```
-
-
 
 
 - 如果你还想要其他插件,从哪里找?
 ```c
      github
-     注意: 某些 插件对 vim 有版本要求
+     vim源码
+     vim邮件列表及vim插件
+```
 
+
+- 安装的时候及运行的时候会出什么问题?
+```c
+1/
+     下载不下来脚本,因为github 是外国网站
+2/
+     下载不来插件,因为插件在github上
+3/
+     插件不支持vim
+     1/ 插件 需要 更高的 vim版本
+     2/ 插件 需要 vim 在编译时加上对某些脚本的支持特性 
+          python lua
 ```
