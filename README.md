@@ -55,7 +55,7 @@ bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim
 
     " A PluginA tagbar 函数列表 
     
-    " B Plugin3 nerdcommenter 快速注释
+    " B PluginB nerdcommenter 快速注释
 
     " C PluginC DoxygenToolkit.vim 注释文档
     

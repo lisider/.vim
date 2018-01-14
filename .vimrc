@@ -318,7 +318,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 
 
-" B Plugin3 nerdcommenter 快速注释
+" B PluginB nerdcommenter 快速注释
 Plugin 'scrooloose/nerdcommenter'
 
 " C PluginC DoxygenToolkit.vim 注释文档
@@ -485,7 +485,7 @@ let g:ctrlp_user_command = {
 nmap <F2> :TagbarToggle <CR>
 
 
-" B Config3 nerdcommenter 快速注释
+" B ConfigB nerdcommenter 快速注释
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
