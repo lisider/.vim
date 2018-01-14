@@ -20,7 +20,13 @@
 - 怎么用？
 
 ```c
-curl -s https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh |bash
+1/
+方法1
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh)"
+
+方法2
+bash -c "$(wget https://raw.githubusercontent.com/lisider/.vim/master/config_vim.sh -O -)"
+
 ```
 
 - 还能怎么做
