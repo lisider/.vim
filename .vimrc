@@ -76,7 +76,7 @@ syntax on
 set fileencodings=utf-8,chinese,latin-1
 
 "终端编码格式
-set   termencoding=utf-8
+set termencoding=utf-8
 
 "高亮当前行
 set cursorline
@@ -167,12 +167,18 @@ set cmdheight=2
 " 显示 tab 和 回车  tab 为 ^I  回车 为 $
 "set list
 "set listchars=tab:>-,trail:-
+
+"自动拼音检查
+autocmd FileType text setlocal spell spelllang=en_us,cjk
+
+
 " MAP {{{1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"两头加入(),一开始的执行位置在字母的第一个字符
 "因为插件的原因,需要多插入一个 <del>
 map \p i(<del><Esc>ea)<Esc>
 
@@ -201,19 +207,17 @@ cmap sw w !sudo tee >/dev/null %
 nnoremap <space> :
 vnoremap <space> :
 
-if 1
-    "映射光标在 vsplit 窗口间移动的快捷键
+"映射光标在 vsplit 窗口间移动的快捷键
 
-    nnoremap <C-h> <C-W>h
-    nnoremap <C-j> <C-W>j
-    nnoremap <C-k> <C-W>k
-    nnoremap <C-l> <C-W>l
-    "下面的这条有问题 会把 insert 模式下的 backspace 搞丢
-    "inoremap <C-h> <Esc><C-W>h
-    inoremap <C-j> <Esc><C-W>j
-    inoremap <C-k> <Esc><C-W>k
-    inoremap <C-l> <Esc><C-W>l
-endif
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+"下面的这条有问题 会把 insert 模式下的 backspace 搞丢
+"inoremap <C-h> <Esc><C-W>h
+inoremap <C-j> <Esc><C-W>j
+inoremap <C-k> <Esc><C-W>k
+inoremap <C-l> <Esc><C-W>l
 
 " Fn 的映射  
 
