@@ -171,6 +171,8 @@ set cmdheight=2
 "自动拼音检查
 autocmd FileType text setlocal spell spelllang=en_us,cjk
 
+"激活man窗口
+:source $VIMRUNTIME/ftplugin/man.vim
 
 " MAP {{{1
 
@@ -228,6 +230,23 @@ function! Build()
     cl  "list the errors
 endfunction 
 map <F5> :call Build()<CR>
+
+
+function! ShowManInfoByShell(tag,manual)
+	let cmd="Man ".a:manual." ".a:tag
+	execute ":".cmd
+endfunction
+
+function! ShowMan2Info()
+	call ShowManInfoByShell(expand("<cword>"),2)
+endfunction
+
+function! ShowMan3Info()
+	call ShowManInfoByShell(expand("<cword>"),3)
+endfunction
+
+nnoremap 2 :call ShowMan2Info()<CR>
+nnoremap 3 :call ShowMan3Info()<CR>
 
 
 " Vundle Plugin {{{1
@@ -627,6 +646,7 @@ autocmd BufNewFile * normal G
 
 
 " RESET {{{1
+" 该区是因为 前面的设置冲突,重新设置使其生效
 
 "set whichwrap=b,s,<,>,[,] 
 set iskeyword+=-
