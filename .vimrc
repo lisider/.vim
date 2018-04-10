@@ -238,10 +238,12 @@ endfunction
 
 function! ShowMan2Info()
 	call ShowManInfoByShell(expand("<cword>"),2)
+    normal 6j
 endfunction
 
 function! ShowMan3Info()
 	call ShowManInfoByShell(expand("<cword>"),3)
+    normal 6j
 endfunction
 
 nnoremap e :call ShowMan2Info()<CR>
