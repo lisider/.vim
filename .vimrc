@@ -24,14 +24,13 @@ set ruler
 " 背景亮度
 set bg=dark " light
 
-
-"设置 \t 转换为空格
-set expandtab
-"设置制表符宽度为4
-"set tabstop=4
-"设置缩进的空格数为4
+"设置一次回车的宽度,默认为8
 set shiftwidth=4
-set softtabstop=5
+"设置 将回车全部转换为空格,否则将转换为tab
+set expandtab 
+"设置tab 的宽度
+set tabstop=4
+
 
 "设置和上一行一样缩进
 set autoindent
