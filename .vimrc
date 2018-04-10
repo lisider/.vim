@@ -244,8 +244,8 @@ function! ShowMan3Info()
 	call ShowManInfoByShell(expand("<cword>"),3)
 endfunction
 
-nnoremap 2 :call ShowMan2Info()<CR>
-nnoremap 3 :call ShowMan3Info()<CR>
+nnoremap e :call ShowMan2Info()<CR>
+nnoremap q :call ShowMan3Info()<CR>
 
 
 " Vundle Plugin {{{1
