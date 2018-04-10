@@ -194,6 +194,9 @@ noremap H ^i
 "行尾
 noremap L $a
 
+"每一次粘贴都会格式化整个文件
+noremap p pgg<C-v>G=<C-o><C-o>
+
 "mapleader 名字空间
 let mapleader=";"
 "按下 ;j 触发 easymotion 的 j
