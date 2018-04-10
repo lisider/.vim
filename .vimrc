@@ -235,17 +235,17 @@ map <F5> :call Build()<CR>
 
 
 function! ShowManInfoByShell(tag,manual)
-	let cmd="Man ".a:manual." ".a:tag
-	execute ":".cmd
+    let cmd="Man ".a:manual." ".a:tag
+    execute ":".cmd
 endfunction
 
 function! ShowMan2Info()
-	call ShowManInfoByShell(expand("<cword>"),2)
+    call ShowManInfoByShell(expand("<cword>"),2)
     normal 6j
 endfunction
 
 function! ShowMan3Info()
-	call ShowManInfoByShell(expand("<cword>"),3)
+    call ShowManInfoByShell(expand("<cword>"),3)
     normal 6j
 endfunction
 
@@ -313,11 +313,12 @@ Plugin 'vim-airline/vim-airline-themes' "状态栏主题
 
 
 " 2 Plugin2 ultisnips 自动扩展 及分片
-Plugin 'SirVer/ultisnips' " snip 引擎
-Plugin 'honza/vim-snippets' "常用的 snippet 
+Plugin 'drmingdrmer/xptemplate' " snippet
 
 " 3 Plugin3 neocomplete.vim 候选列表
 Plugin 'Shougo/neocomplete.vim' 
+Plugin 'Shougo/neco-vim'
+Plugin 'Shougo/neco-syntax'
 
 " 4 Plugin4 auto-pairs 括号数目匹配
 Plugin 'jiangmiao/auto-pairs'
@@ -348,7 +349,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 
 " D PluginD supertab 解决 neocomplete.vim 和 ultisnips 的兼容问题
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 
 " E PluginE csapprox 解决 文字终端和 图形终端色彩不同的问题 
 Plugin 'godlygeek/csapprox'
@@ -393,14 +394,7 @@ let g:airline_theme='simple' "更改主题,主题位置在 ~/.vim/bundle/vim-air
 
 
 " 2 Config2 ultisnips 自动扩展
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>" " 更改展开键为
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
+let g:xptemplate_key = '<Tab>' "将扩展快捷键 替换为tab键,默认为 ctrl \
 
 " 3 Config3 neocomplete 候选列表
 let g:neocomplete#enable_at_startup = 1
