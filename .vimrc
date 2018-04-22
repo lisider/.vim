@@ -266,6 +266,10 @@ function! RunShell(Msg, Shell)
 endfunction
 
 "执行编译
+" 编译有很多错误,然后你可以直接回车,跳入源码修改,修改完一个,:cn
+" 然后修改完下一个,:cn
+" 直到修改完毕,然后:wa保存 ,然后再次编译
+" 如果 想要错误详细信息,请 :cw 打开一个quickfix 窗口
 function! Build()
     make
     cl  "list the errors
