@@ -101,50 +101,23 @@ set foldmethod=marker
 "configure tags - add additional tags here or comment out not-used ones
 set tags=./tags,tags;
 
-" cscope 设置
 if has("cscope")
-    set csto=1
+    set csprg=/usr/bin/cscope
+    set csto=0
     set cst
     set nocsverb
+    set cspc=3
+    "add any database in current dir
     if filereadable("cscope.out")
         cs add cscope.out
+    else  "else search cscope.out elsewhere
+        let cscope_file=findfile("cscope.out",".;")
+        let cscope_pre=matchstr(cscope_file,".*/")
+        if !empty(cscope_file) && filereadable(cscope_file)
+            exe "cs add" cscope_file cscope_pre
+        endif
     endif
-    set csverb
 endif
-
-" function! LoadCscope()
-"   let db = findfile("cscope.out", ".;")
-"   if (!empty(db))
-"     let path = strpart(db, 0, match(db, "/cscope.out$"))
-"     set nocscopeverbose " suppress 'duplicate connection' error
-"     exe "cs add " . db . " " . path
-"     set cscopeverbose
-"   " else add the database pointed to by environment variable
-"   elseif $CSCOPE_DB != ""
-"     cs add $CSCOPE_DB
-"   endif
-" endfunction
-" au BufEnter /* call LoadCscope()
-
-
-" if has("cscope")
-"     set csprg=/usr/bin/cscope
-"     set csto=0
-"     set cst
-"     set nocsverb
-"     set cspc=3
-"     "add any database in current dir
-"     if filereadable("cscope.out")
-"         cs add cscope.out
-"     else  "else search cscope.out elsewhere
-"         let cscope_file=findfile("cscope.out",".;")
-"         let cscope_pre=matchstr(cscope_file,".*/")
-"         if !empty(cscope_file) && filereadable(cscope_file)
-"             "exe "cs add" cscope_file cscope_pre
-"             cs add cscope_file cscope_pre
-"         endif
-"     endif
-" endif
 
 if 0
     if has("vms") "因为在 vms 系统中 会自动创建备份
@@ -320,7 +293,7 @@ endfunction
 " F2 项目树
 " F3 函数列表
 " F4 创建ctags 和 cscope
-nnoremap <F4>  :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>:call RunShell("Generate cscope", "cscope -Rkbq")<cr>:cs add cscope.out<cr>
+nnoremap <F4>  :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>:call RunShell("Generate cscope files", "find `pwd` -name \"*.[ch]\" -o -name \"*.cpp\" > cscope.files")<cr>:call RunShell("Generate cscope", "cscope -Rb")<cr>:cs add cscope.out<cr>
 " F5 build
 nnoremap <F5>  :call Build()<CR>
 " F6 搜索
