@@ -102,6 +102,17 @@ set foldmethod=marker
 set tags+=~/.vim/tags/cpp
 set tags+=./tags
 
+" cscope.vim
+if has("cscope")
+    set csto=1
+    set cst
+    set nocsverb
+    if filereadable("cscope.out")
+        cs add cscope.out
+    endif
+    set csverb
+endif
+
 if 0
     if has("vms") "因为在 vms 系统中 会自动创建备份
         set nobackup                       
