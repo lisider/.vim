@@ -99,10 +99,9 @@ set foldmethod=marker
 
 
 "configure tags - add additional tags here or comment out not-used ones
-set tags+=~/.vim/tags/cpp
-set tags+=./tags
+set tags=./tags,tags;
 
-" cscope.vim
+" cscope 设置
 if has("cscope")
     set csto=1
     set cst
@@ -112,6 +111,40 @@ if has("cscope")
     endif
     set csverb
 endif
+
+" function! LoadCscope()
+"   let db = findfile("cscope.out", ".;")
+"   if (!empty(db))
+"     let path = strpart(db, 0, match(db, "/cscope.out$"))
+"     set nocscopeverbose " suppress 'duplicate connection' error
+"     exe "cs add " . db . " " . path
+"     set cscopeverbose
+"   " else add the database pointed to by environment variable
+"   elseif $CSCOPE_DB != ""
+"     cs add $CSCOPE_DB
+"   endif
+" endfunction
+" au BufEnter /* call LoadCscope()
+
+
+" if has("cscope")
+"     set csprg=/usr/bin/cscope
+"     set csto=0
+"     set cst
+"     set nocsverb
+"     set cspc=3
+"     "add any database in current dir
+"     if filereadable("cscope.out")
+"         cs add cscope.out
+"     else  "else search cscope.out elsewhere
+"         let cscope_file=findfile("cscope.out",".;")
+"         let cscope_pre=matchstr(cscope_file,".*/")
+"         if !empty(cscope_file) && filereadable(cscope_file)
+"             "exe "cs add" cscope_file cscope_pre
+"             cs add cscope_file cscope_pre
+"         endif
+"     endif
+" endif
 
 if 0
     if has("vms") "因为在 vms 系统中 会自动创建备份
@@ -190,10 +223,13 @@ autocmd FileType text setlocal spell spelllang=en_us,cjk
 " map 区
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"mapleader 名字空间
+"表示 <Leader> 为 ;
+let mapleader=";"
+
 "两头加入(),一开始的执行位置在字母的第一个字符
 "因为插件的原因,需要多插入一个 <del>
 map \p i(<del><Esc>ea)<Esc>
-
 
 "小写转大写 wb 为 到 单词 的开始
 nnoremap gu  wbgUw
@@ -208,12 +244,6 @@ noremap L $a
 "每一次粘贴都会格式化整个文件
 noremap p pgg<C-v>G=<C-o><C-o>
 
-"mapleader 名字空间
-let mapleader=";"
-"按下 ;j 触发 easymotion 的 j
-"map <Leader>j <Plug>(easymotion-j)
-"按下 ;k 触发 easymotion 的 k
-"map <Leader>k <Plug>(easymotion-k)
 
 "强制保存命令
 cmap sw w !sudo tee >/dev/null %
@@ -234,17 +264,41 @@ inoremap <C-j> <Esc><C-W>j
 inoremap <C-k> <Esc><C-W>k
 inoremap <C-l> <Esc><C-W>l
 
-" Fn 的映射  
+"cscope 映射
+nmap <leader>sa :cs add cscope.out<cr>
+nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>s  :cs find c <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
 
-nnoremap <F4> :!ctags -R.<CR>
+" 切换工作目录到当前编辑文件目录
+nnoremap <leader>. :cd %:p:h<CR>
+" 打开 ~/.vimrc 文件
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" 按 ;ld重载配置文件
+"nmap <silent> <leader>ld :so $MYVIMRC<CR>
+" tags 返回 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 各类函数,用来被别的执行序列调用
+"
+" 执行shell,显示信息
+function! RunShell(Msg, Shell)
+    echo a:Msg . '...'
+    call system(a:Shell)
+    echon 'done'
+endfunction
 
+"执行编译
 function! Build()
     make
     cl  "list the errors
 endfunction 
-map <F5> :call Build()<CR>
 
-
+" 执行 Man
 function! ShowManInfoByShell(tag,manual)
     let cmd="Man ".a:manual." ".a:tag
     execute ":".cmd
@@ -259,6 +313,18 @@ function! ShowMan3Info()
     call ShowManInfoByShell(expand("<cword>"),3)
     normal 6j
 endfunction
+
+
+" Fn 的映射
+
+" F2 项目树
+" F3 函数列表
+" F4 创建ctags 和 cscope
+nnoremap <F4>  :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>:call RunShell("Generate cscope", "cscope -Rkbq")<cr>:cs add cscope.out<cr>
+" F5 build
+nnoremap <F5>  :call Build()<CR>
+" F6 搜索
+nmap  <F6> :vimgrep /<C-R>=expand("<cword>")<cr>/ **/*.c **/*.h<cr><C-o>:cw<cr>
 
 nnoremap e :call ShowMan2Info()<CR>
 nnoremap q :call ShowMan3Info()<CR>
@@ -474,7 +540,7 @@ map <Leader>k <Plug>(easymotion-k)"
 
 
 " 8 Config8 nerdtree 项目树
-nmap <F3> :NERDTreeToggle<cr>
+nmap <F2> :NERDTreeToggle<cr>
 "如果只剩下打开的窗口是NERDTree，怎么关闭vim？
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "默认箭头
@@ -510,7 +576,7 @@ let g:ctrlp_user_command = {
 "useage : :help ctrlp-options
 
 " A ConfigA tagbar 函数列表
-nmap <F2> :TagbarToggle <CR>
+nmap <F3> :TagbarToggle <CR>
 
 
 " B ConfigB nerdcommenter 快速注释
