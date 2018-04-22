@@ -603,6 +603,7 @@ let g:DoxygenToolkit_licenseTag="My own license"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "最好不要自己安装,最好让 Vendle 管理
+" 自己要装的话 可以装入 .vim/plugin/xxx.vim .vim/doc/xxx.txt
 
 
 " AUTOCMD {{{1
