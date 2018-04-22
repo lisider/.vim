@@ -202,7 +202,8 @@ let mapleader=";"
 
 "两头加入(),一开始的执行位置在字母的第一个字符
 "因为插件的原因,需要多插入一个 <del>
-map \p i(<del><Esc>ea)<Esc>
+"因为 map了 e ,所以 这个就失效了
+"map \p i(<del><Esc>ea)<Esc>
 
 "小写转大写 wb 为 到 单词 的开始
 nnoremap gu  wbgUw
@@ -257,6 +258,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 " tags 返回 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 各类函数,用来被别的执行序列调用
+" 函数中的命令都是底行模式下的命令 即 :make 等等
 "
 " 执行shell,显示信息
 function! RunShell(Msg, Shell)
