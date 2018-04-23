@@ -305,9 +305,10 @@ endfunction
 " F2 项目树
 " F3 函数列表
 " F4 创建ctags 和 cscope
+" F5 lookupfile
 nnoremap <F4>  :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .")<cr>:call RunShell("Generate cscope files", "find `pwd` -name \"*.[ch]\" -o -name \"*.cpp\" > cscope.files")<cr>:call RunShell("Generate cscope", "cscope -Rb")<cr>:cs add cscope.out<cr>
-" F5 build
-nnoremap <F5>  :call Build()<CR>
+" F8 build
+nnoremap <F8>  :call Build()<CR>
 " F6 搜索
 nmap  <F6> :vimgrep /<C-R>=expand("<cword>")<cr>/ **/*.c **/*.h<cr><C-o>:cw<cr>
 " F7 换回
@@ -422,8 +423,14 @@ Plugin 'godlygeek/csapprox'
 Plugin 'vim-scripts/VisIncr'
 
 
-" 10 Plugin10 bufferhint 缓冲区文件查找及切换
+" 10 Plugin10 bufferhint 目前打开的文件查找及切换
 Plugin 'bsdelf/bufferhint'
+
+" 11 Plugin11 lookupfile 查找目录中的文件
+Plugin 'vim-scripts/lookupfile'
+
+" 12 Plugin12 genutils lookupfile插件要求
+Plugin 'vim-scripts/genutils'
 
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
@@ -608,6 +615,48 @@ let g:DoxygenToolkit_licenseTag="My own license"
 " 10 Config10 bufferhint 缓冲区文件查找及切换
 nnoremap - :call bufferhint#Popup()<CR>
 nnoremap \ :call bufferhint#LoadPrevious()<CR>
+
+
+" 11 Plugin11 lookupfile 查找目录中的文件
+
+let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
+
+if filereadable("./filenametags")                "设置tag文件的名字
+let g:LookupFile_TagExpr = '"./filenametags"'
+endif
+
+"映射LookupFile为,lk
+nmap <silent> <leader>lk :LUTags<cr>
+"映射LUBufs为,ll
+nmap <silent> <leader>ll :LUBufs<cr>
+"映射LUWalk为,lw
+nmap <silent> <leader>lw :LUWalk<cr>
+
+function! LookupFile_IgnoreCaseFunc(pattern)
+    let _tags = &tags
+    try
+        let &tags = eval(g:LookupFile_TagExpr)
+        let newpattern = '\c' . a:pattern
+        let tags = taglist(newpattern)
+    catch
+        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
+        return ""
+    finally
+        let &tags = _tags
+    endtry
+
+    " Show the matches for what is typed so far.
+    let files = map(tags, 'v:val["filename"]')
+    return files
+endfunction
+
+let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
+
+
 
 
 
