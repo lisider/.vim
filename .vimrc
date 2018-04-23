@@ -422,6 +422,8 @@ Plugin 'godlygeek/csapprox'
 Plugin 'vim-scripts/VisIncr'
 
 
+" 10 Plugin10 bufferhint 缓冲区文件查找及切换
+Plugin 'bsdelf/bufferhint'
 
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
@@ -603,6 +605,9 @@ let g:DoxygenToolkit_licenseTag="My own license"
 " useage DoxLic DoxAuthor Dox
 
 
+" 10 Config10 bufferhint 缓冲区文件查找及切换
+nnoremap - :call bufferhint#Popup()<CR>
+nnoremap \ :call bufferhint#LoadPrevious()<CR>
 
 
 
