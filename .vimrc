@@ -190,6 +190,12 @@ autocmd FileType text setlocal spell spelllang=en_us,cjk
 "激活man窗口
 :source $VIMRUNTIME/ftplugin/man.vim
 
+"设置一些命令 "gf" ":find"  "ctrl-w f"
+set path+=.
+set path+=./inc
+set path+=./include
+
+
 " MAP {{{1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -304,6 +310,8 @@ nnoremap <F4>  :call RunShell("Generate tags", "ctags -R --c++-kinds=+p --fields
 nnoremap <F5>  :call Build()<CR>
 " F6 搜索
 nmap  <F6> :vimgrep /<C-R>=expand("<cword>")<cr>/ **/*.c **/*.h<cr><C-o>:cw<cr>
+" F7 换回
+nmap  <F7> :e#<CR>
 
 nnoremap e :call ShowMan2Info()<CR>
 nnoremap q :call ShowMan3Info()<CR>
