@@ -432,6 +432,9 @@ Plugin 'vim-scripts/lookupfile'
 " 12 Plugin12 genutils lookupfile插件要求
 Plugin 'vim-scripts/genutils'
 
+" 13 Plugin13 Marks-Browser 标签相关
+Plugin 'vim-scripts/Marks-Browser'
+
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
@@ -626,7 +629,7 @@ let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项�
 let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
 
 if filereadable("./filenametags")                "设置tag文件的名字
-let g:LookupFile_TagExpr = '"./filenametags"'
+    let g:LookupFile_TagExpr = '"./filenametags"'
 endif
 
 "映射LookupFile为,lk
@@ -656,6 +659,9 @@ endfunction
 
 let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 
+
+" 13 Config13 Marks-Browser 标签相关
+nmap <silent> <leader>mk :MarksBrowser<cr>
 
 
 
