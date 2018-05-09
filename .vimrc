@@ -435,6 +435,9 @@ Plugin 'vim-scripts/genutils'
 " 13 Plugin13 Marks-Browser 标签相关
 Plugin 'vim-scripts/Marks-Browser'
 
+" 14 Plugin14 vim-trailing-whitespace 去行尾空格
+Plugin 'bronson/vim-trailing-whitespace'
+
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
 "--------------------------------------------------------------------
@@ -664,6 +667,8 @@ let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
 nmap <silent> <leader>mk :MarksBrowser<cr>
 
 
+" 14 Plugin14 vim-trailing-whitespace 去行尾空格
+" :FixWhitespace 去行尾空格命令
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
