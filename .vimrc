@@ -27,7 +27,7 @@ set bg=dark " light
 "设置一次回车的宽度,默认为8
 set shiftwidth=4
 "设置 将回车全部转换为空格,否则将转换为tab
-set expandtab 
+set expandtab
 "设置tab 的宽度
 set tabstop=4
 
@@ -35,7 +35,7 @@ set tabstop=4
 "设置和上一行一样缩进
 set autoindent
 "设置使用C/C++ 缩进
-set cindent        
+set cindent
 " 设置缩进模式
 "set   cinoptions=:0
 "探测文件类型
@@ -64,7 +64,7 @@ set ignorecase smartcase "根据输入,如果是小写,忽略大小写,如果有
 set hlsearch
 "未输入完成就开始检索
 set incsearch
-"set is 
+"set is
 
 
 "关键字上色
@@ -85,13 +85,13 @@ set cursorline
 set wildmenu
 
 "匹配下拉菜单
-set completeopt=longest,menu 
+set completeopt=longest,menu
 
 "不使用代码折叠功能
 "set nofoldenable
 "使用代码折叠
 set foldenable
-"折叠方法 6中  
+"折叠方法 6中
 "方法    关键字
 "marker  Line {\{\{\1
 set foldmethod=marker
@@ -121,13 +121,13 @@ endif
 
 if 0
     if has("vms") "因为在 vms 系统中 会自动创建备份
-        set nobackup                       
+        set nobackup
     else
         set backup
     endif
 endif
 
-set nobackup                       
+set nobackup
 "表示不创建临时交换文件
 "set noswapfile
 
@@ -156,7 +156,7 @@ set sidescroll=10
 set showcmd
 
 "自动折返 ,这个被覆盖了,后面重写一次就好了
-set whichwrap=b,s,<,>,[,] 
+set whichwrap=b,s,<,>,[,]
 
 "模式匹配要写入的文件名，不建立它的备份文件
 set wildignore=*.bak,*.o,*.e,*~
@@ -170,8 +170,8 @@ set wildmenu
 
 set history=1000
 
-" 不显示 tab 和 回车 
-set nolist 
+" 不显示 tab 和 回车
+set nolist
 
 "对于vim 来说什么是一个单词 ,需要重写
 "set iskeyword=@,48-57,_,192-255
@@ -261,7 +261,7 @@ nnoremap <leader>. :cd %:p:h<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 " 按 ;ld重载配置文件
 "nmap <silent> <leader>ld :so $MYVIMRC<CR>
-" tags 返回 
+" tags 返回
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 各类函数,用来被别的执行序列调用
 " 函数中的命令都是底行模式下的命令 即 :make 等等
@@ -281,7 +281,7 @@ endfunction
 function! Build()
     make
     cl  "list the errors
-endfunction 
+endfunction
 
 " 执行 Man
 function! ShowManInfoByShell(tag,manual)
@@ -381,7 +381,7 @@ Plugin 'vim-airline/vim-airline-themes' "状态栏主题
 Plugin 'drmingdrmer/xptemplate' " snippet
 
 " 3 Plugin3 neocomplete.vim 候选列表
-Plugin 'Shougo/neocomplete.vim' 
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neco-vim'
 Plugin 'Shougo/neco-syntax'
 
@@ -416,7 +416,7 @@ Plugin 'vim-scripts/DoxygenToolkit.vim'
 " D PluginD supertab 自动补全
 Plugin 'ervandew/supertab'
 
-" E PluginE csapprox 解决 文字终端和 图形终端色彩不同的问题 
+" E PluginE csapprox 解决 文字终端和 图形终端色彩不同的问题
 Plugin 'godlygeek/csapprox'
 
 " F PluginF VisIncr  增强纵向编辑
@@ -613,7 +613,7 @@ let g:DoxygenToolkit_returnTag="@Returns   "
 let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
 let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
 let g:DoxygenToolkit_authorName="Sues"
-let g:DoxygenToolkit_licenseTag="My own license"  
+let g:DoxygenToolkit_licenseTag="My own license"
 
 " useage DoxLic DoxAuthor Dox
 
@@ -687,61 +687,61 @@ nmap <silent> <leader>mk :MarksBrowser<cr>
 
 
 "保留vim 上次编辑位置,下次从这里打开
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif   
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-" 解决 YCM 和  Ultisnips tab 键 冲突 
+" 解决 YCM 和  Ultisnips tab 键 冲突
 
 
 " TITLE {{{1
 
 """"""""""""""""""""""""""""""""""""""""""
-" title 区  
+" title 区
 """"""""""""""""""""""""""""""""""""""""""
 
 
-"新建.c,.h,.sh,.java文件，自动插入文件头 
+"新建.c,.h,.sh,.java文件，自动插入文件头
 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()" 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 
-""定义函数SetTitle，自动插入文件头 
+""定义函数SetTitle，自动插入文件头
 
-func SetTitle() 
+func SetTitle()
 
-    "如果文件类型为.sh文件 
+    "如果文件类型为.sh文件
 
-    if &filetype == 'sh' 
+    if &filetype == 'sh'
 
-        call setline(1,"\#########################################################################") 
+        call setline(1,"\#########################################################################")
 
-        call append(line("."), "\# File Name: ".expand("%")) 
+        call append(line("."), "\# File Name: ".expand("%"))
 
-        call append(line(".")+1, "\# Author: Sues") 
+        call append(line(".")+1, "\# Author: Sues")
 
-        call append(line(".")+2, "\# mail: sumory.kaka@foxmail.com") 
+        call append(line(".")+2, "\# mail: sumory.kaka@foxmail.com")
 
-        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))
 
-        call append(line(".")+4, "\# Version : 1.0") 
+        call append(line(".")+4, "\# Version : 1.0")
 
-        call append(line(".")+5, "\#########################################################################") 
+        call append(line(".")+5, "\#########################################################################")
 
-        call append(line(".")+6, "\#!/bin/bash") 
+        call append(line(".")+6, "\#!/bin/bash")
 
-        call append(line(".")+7, "") 
+        call append(line(".")+7, "")
 
-    else 
+    else
 
-        call setline(1, "/*************************************************************************") 
+        call setline(1, "/*************************************************************************")
 
-        call append(line("."), "  > File Name: ".expand("%")) 
+        call append(line("."), "  > File Name: ".expand("%"))
 
-        call append(line(".")+1, "  > Author: Sues") 
+        call append(line(".")+1, "  > Author: Sues")
 
-        call append(line(".")+2, "  > Mail: sumory.kaka@foxmail.com ") 
+        call append(line(".")+2, "  > Mail: sumory.kaka@foxmail.com ")
 
-        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
+        call append(line(".")+3, "  > Created Time: ".strftime("%c"))
 
-        call append(line(".")+4, " ************************************************************************/") 
+        call append(line(".")+4, " ************************************************************************/")
 
         call append(line(".")+5, "")
 
@@ -766,7 +766,7 @@ func SetTitle()
     endif
 
 
-endfunc 
+endfunc
 
 "新建文件后，自动定位到文件末尾
 
@@ -776,7 +776,7 @@ autocmd BufNewFile * normal G
 " RESET {{{1
 " 该区是因为 前面的设置冲突,重新设置使其生效
 
-"set whichwrap=b,s,<,>,[,] 
+"set whichwrap=b,s,<,>,[,]
 set iskeyword+=-
 
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
