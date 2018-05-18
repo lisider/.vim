@@ -222,7 +222,7 @@ noremap H ^i
 noremap L $a
 
 "每一次粘贴都会格式化整个文件
-noremap p pgg<C-v>G=<C-o><C-o>
+"noremap p pgg<C-v>G=<C-o><C-o>
 
 
 "强制保存命令
@@ -733,13 +733,13 @@ func SetTitle()
 
         call setline(1, "/*************************************************************************") 
 
-        call append(line("."), "    > File Name: ".expand("%")) 
+        call append(line("."), "  > File Name: ".expand("%")) 
 
-        call append(line(".")+1, "    > Author: Sues") 
+        call append(line(".")+1, "  > Author: Sues") 
 
-        call append(line(".")+2, "    > Mail: sumory.kaka@foxmail.com ") 
+        call append(line(".")+2, "  > Mail: sumory.kaka@foxmail.com ") 
 
-        call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
+        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
 
         call append(line(".")+4, " ************************************************************************/") 
 
