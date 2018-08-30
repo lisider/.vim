@@ -317,6 +317,7 @@ nmap  <F7> :e#<CR>
 nnoremap e :call ShowMan2Info()<CR>
 nnoremap q :call ShowMan3Info()<CR>
 
+nnoremap <Leader>f  [[kw
 
 " Vundle Plugin {{{1
 
