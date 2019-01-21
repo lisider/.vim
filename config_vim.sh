@@ -25,5 +25,7 @@ ln -s ~/.vim/.vimrc ~/.vimrc
 
 vim <<ipipioipiopip
 :PluginInstall
+
+:q!
 ipipioipiopip
 
