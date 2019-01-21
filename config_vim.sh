@@ -14,8 +14,8 @@ else
     :
 fi
 
-mv ~/.vim ~/.vim_bak
-mv ~/.vimrc ~/.vim_bak
+[ -e ~/.vim ] && mv ~/.vim ~/.vim_bak
+[ -e ~/.vimrc ] && mv ~/.vimrc ~/.vim_bak
 
 
 git clone https://github.com/lisider/.vim.git ~/.vim
